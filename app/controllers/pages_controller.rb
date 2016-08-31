@@ -4,6 +4,7 @@ class PagesController < ApplicationController
     timestemp = time.to_i
 
     #calling the OVH gem
+
     ovh = OVH::REST.new(apiKey, appSecret, consumerKey)
 
   end
