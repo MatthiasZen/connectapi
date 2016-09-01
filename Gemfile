@@ -32,6 +32,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'better_errors', '~> 2.1', '>= 2.1.1'
 gem "binding_of_caller"
 gem 'ovh-rest', '~> 0.0.5'
+gem "figaro"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
