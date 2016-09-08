@@ -5,7 +5,7 @@ class PagesController < ApplicationController
 
     #calling the OVH REST gem
 
-    ovh = OVH::REST.new("60A5LSieS4KVAn4R", "XgF3lQeuga8S790Cy16NjU4spLFyha7y", "2wlviFYogCFvNfke41WnJE0lhx8Izk1a")
+    ovh = OVH::REST.new("6x6sBHG1IyuyPRup", "zJ32TthBnOPsONVjK3E3ZV65qYkYvNBF", "r9vi6k8l6fffAbeVV7fwhU6N0WcrzXCc")
 
     # Get sms account status
 
