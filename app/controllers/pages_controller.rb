@@ -9,7 +9,7 @@ class PagesController < ApplicationController
 
     # Get sms account status
 
-result = ovh.get("/auth/currentCredential")
+result = ovh.get("/domain/mobicafe.fr/serviceInfos")
 
 
 @resultat = JSON.pretty_generate(result)
