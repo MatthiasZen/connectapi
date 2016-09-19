@@ -10,7 +10,7 @@ class PagesController < ApplicationController
 
     #calling the OVH REST gem
 
-    ovh = OVH::REST.new("6x6sBHG1IyuyPRup", "zJ32TthBnOPsONVjK3E3ZV65qYkYvNBF", "r9vi6k8l6fffAbeVV7fwhU6N0WcrzXCc")
+    ovh = OVH::REST.new(ENV["apiKey"], ENV["appSecret"], ENV["consumerKey"])
 
     # Get account status
 
