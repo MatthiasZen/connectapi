@@ -5,6 +5,7 @@ class PagesController < ApplicationController
 
   def show
     domain_name = params["ndd"]
+
     time = Time.new()
     timestemp = time.to_i
 
