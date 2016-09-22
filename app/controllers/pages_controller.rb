@@ -5,14 +5,15 @@ class PagesController < ApplicationController
 
   def show
     domain_name = params["ndd"]
-    if domain_name.match(/[a-zA-Z]+[.]+(com|fr|be)/)
 
-        time = Time.new()
-        timestemp = time.to_i
+    #calling the OVH REST gem
 
-        #calling the OVH REST gem
+    ovh = OVH::REST.new(ENV["apiKey"], ENV["appSecret"], ENV["consumerKey"])
 
-        ovh = OVH::REST.new(ENV["apiKey"], ENV["appSecret"], ENV["consumerKey"])
+    #checking if the domian_name is on ovh
+    all_domain = ovh.get("/domain/")
+
+   if all_domain.include?(domain_name)
 
         # Get account status
 
