@@ -20,7 +20,7 @@ class PagesController < ApplicationController
         @resultat = ovh.get("/domain/#{domain_name}/serviceInfos")
 
       else
-        flash[:alert] = "Le nom de domaine doit être au format ndd.fr ou ndd.com"
+        flash[:alert] = "Le nom de domaine n'existe pas ou doit être au format ndd.fr ou ndd.com"
         redirect_to root_path
     end
   end
