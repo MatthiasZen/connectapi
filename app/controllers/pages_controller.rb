@@ -18,6 +18,8 @@ class PagesController < ApplicationController
         # Get account status
 
         @resultat = ovh.get("/domain/#{domain_name}/serviceInfos")
+        @is_locked = ovh.get("/domain/#{domain_name}")
+
 
       else
         flash[:alert] = "Le nom de domaine n'existe pas ou doit être au format ndd.fr ou ndd.com"

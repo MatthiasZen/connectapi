@@ -3,5 +3,7 @@
 
   <p>Ce nom de domaine a été créé le (Année/Mois/Jour): <%=@resultat["creation"]%></p>
   <p>Il expire le (Année/Mois/Jour): <%=@resultat["expiration"]%></p>
-  <p>Le renouvellement se fait de manière "<%=@resultat["renewalType"]%>"</p>
+  <p>Le renouvellement se fait de manière: "<%=@resultat["renewalType"]%>"</p>
+  <p>Est-ce que le nom de domaine est déveroullé pour afficher le code Oauth?
+  <%=@is_locked["transferLockStatus"]%></p>
 </div>
