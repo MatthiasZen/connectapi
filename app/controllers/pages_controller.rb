@@ -19,6 +19,7 @@ class PagesController < ApplicationController
 
         @resultat = ovh.get("/domain/#{domain_name}/serviceInfos")
         @is_locked = ovh.get("/domain/#{domain_name}")
+        #@unlocked = ovh.put("/domain/#{domain_name}", transferLockStatus='locked')
 
 
       else
@@ -26,8 +27,12 @@ class PagesController < ApplicationController
         redirect_to root_path
     end
   end
+
+  def update
+
+  end
 end
 
 
-
+#ovh.put("/domain/#{domain_name}", {"transferLockStatus"=>'locked'})
 
