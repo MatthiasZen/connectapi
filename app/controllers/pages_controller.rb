@@ -29,10 +29,15 @@ class PagesController < ApplicationController
   end
 
   def update
-
+    ovh = OVH::REST.new(ENV["apiKey"], ENV["appSecret"], ENV["consumerKey"])
+    all_domain = ovh.get("/domain/")
+    # rendre les params du nom de domaine
+    domain_name = params["ndd"]
+    raise
   end
 end
 
+#faire une méthode pour appeler l'API ovh avec un before action
 
-#ovh.put("/domain/#{domain_name}", {"transferLockStatus"=>'locked'})
+#vh.put("/domain/#{domain_name}", {"transferLockStatus"=>'locked'})
 
