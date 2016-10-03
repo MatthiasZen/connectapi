@@ -46,8 +46,5 @@ class PagesController < ApplicationController
   end
 end
 
-#faire une méthode pour appeler l'API ovh avec un before action -> ne fonctionne pas
-
-#vh.put("/domain/#{domain_name}", {"transferLockStatus"=>'locked'})
 
 
