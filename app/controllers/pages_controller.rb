@@ -19,9 +19,11 @@ class PagesController < ApplicationController
         # Get account status
 
         @resultat = ovh.get("/domain/#{domain_name}/serviceInfos")
-        @is_locked = ovh.get("/domain/#{domain_name}")
-        #@unlocked = ovh.put("/domain/#{domain_name}", transferLockStatus='locked')
-
+        if ovh.get("/domain/#{domain_name}")["transferLockStatus"] == "locked"
+         @is_locked = ovh.get("/domain/#{domain_name}")
+        else
+          render action: update
+        end
 
       else
         flash[:alert] = "Le nom de domaine n'existe pas ou doit être au format ndd.fr ou ndd.com"
@@ -29,11 +31,18 @@ class PagesController < ApplicationController
     end
   end
 
-  def update
+  def edit
     domain_name = params["ndd"]
     ovh = OVH::REST.new(ENV["apiKey"], ENV["appSecret"], ENV["consumerKey"])
-    ovh.put("/domain/#{domain_name}", {"transferLockStatus"=>'unlocked'}
-    #redirect_to pages_show_path
+    ovh.put("/domain/#{domain_name}", {"transferLockStatus"=>'unlocked'})
+    @is_unlocked = ovh.get("/domain/#{domain_name}")
+
+  end
+
+  def update
+    raise
+    #appeler à nouveau l'api ovh (aucune méthode ne focntionne pour ces appels)
+    #afficher le code auth
   end
 end
 

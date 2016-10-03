@@ -7,9 +7,10 @@
   <p>Est-ce que le nom de domaine est déveroullé pour afficher le code Oauth?
   <%=@is_locked["transferLockStatus"]%></p>
 
-  <%=form_tag(controller: "pages", action: "update") do %>
-  <%= hidden_field_tag :ndd, @resultat["domain"]%>
-  <%= submit_tag("Déverouiller le nom de domaine") %>
-  <%end%>
+    <%=form_tag(controller: "pages", action: "edit") do %>
+    <%= hidden_field_tag :ndd, @resultat["domain"]%>
+    <%= submit_tag("Déverouiller le nom de domaine") %>
+    <%end%>
+
 
 </div>
