@@ -40,6 +40,10 @@ class PagesController < ApplicationController
   end
 
   def update
+
+    ovh = OVH::REST.new(ENV["apiKey"], ENV["appSecret"], ENV["consumerKey"])
+    domain_name = params["ndd"]
+    ovh.get("/domain/#{domain_name}/authInfo")
     raise
     #appeler à nouveau l'api ovh (aucune méthode ne focntionne pour ces appels)
     #afficher le code auth
