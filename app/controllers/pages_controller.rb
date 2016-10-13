@@ -36,15 +36,15 @@ class PagesController < ApplicationController
     ovh = OVH::REST.new(ENV["apiKey"], ENV["appSecret"], ENV["consumerKey"])
     ovh.put("/domain/#{domain_name}", {"transferLockStatus"=>'unlocked'})
     @is_unlocked = ovh.get("/domain/#{domain_name}")
-
+    render action: update
   end
 
   def update
 
     ovh = OVH::REST.new(ENV["apiKey"], ENV["appSecret"], ENV["consumerKey"])
     domain_name = params["ndd"]
-    ovh.get("/domain/#{domain_name}/authInfo")
-    raise
+    auth = ovh.get("/domain/#{domain_name}/authInfo")
+    #puts JSON.pretty_generate(result)
     #appeler à nouveau l'api ovh (aucune méthode ne focntionne pour ces appels)
     #afficher le code auth
   end

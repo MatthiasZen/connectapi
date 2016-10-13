@@ -31,7 +31,6 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 gem 'better_errors', '~> 2.1', '>= 2.1.1'
 gem "binding_of_caller"
-gem 'ovh-rest', '~> 0.0.5'
 gem "figaro"
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
 
