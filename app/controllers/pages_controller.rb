@@ -17,12 +17,14 @@ class PagesController < ApplicationController
 
         # Get account status
 
-        @resultat = ovh.get("/domain/#{domain_name}/serviceInfos")
+        resultat = ovh.get("/domain/#{domain_name}/serviceInfos")
+        @resultat = JSON.parse  resultat.first.gsub('=>', ':')
 
         if ovh.get("/domain/#{domain_name}").first.include?('unlocked')
-         redirect_to update
+         redirect_to edit
         else
-          @is_locked = ovh.get("/domain/#{domain_name}")
+          is_locked = ovh.get("/domain/#{domain_name}")
+          @is_locked = JSON.parse  is_locked.first.gsub('=>', ':')
           JSON.pretty_generate(@is_locked)
         end
 
@@ -35,16 +37,19 @@ class PagesController < ApplicationController
   def edit
     domain_name = params["ndd"]
     ovh = OVH::REST.new(ENV["apiKey"], ENV["appSecret"], ENV["consumerKey"])
+    raise
     ovh.put("/domain/#{domain_name}", {"transferLockStatus"=>'unlocked'})
     @is_unlocked = ovh.get("/domain/#{domain_name}")
-    render action: update
+    @auth = ovh.get("/domain/#{domain_name}/authInfo")
+    #JSON.pretty_generate(@auth)
+
   end
 
   def update
-    ovh = OVH::REST.new(ENV["apiKey"], ENV["appSecret"], ENV["consumerKey"])
-    domain_name = params["ndd"]
-    @auth = ovh.get("/domain/#{domain_name}/authInfo")
-    JSON.pretty_generate(@auth)
+    #ovh = OVH::REST.new(ENV["apiKey"], ENV["appSecret"], ENV["consumerKey"])
+    #domain_name = params["ndd"]
+    #@auth = ovh.get("/domain/#{domain_name}/authInfo")
+    #JSON.pretty_generate(@auth)
 
 
     #puts JSON.pretty_generate(result)
