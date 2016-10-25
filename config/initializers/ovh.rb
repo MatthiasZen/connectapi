@@ -40,7 +40,7 @@ module OVH
     end
 
     [:get, :post, :put, :delete].each do |method|
-      define_method method do |endpoint, payload = nil|
+      define_method method do |endpoint, payload = nil, type = "json"|
         raise RESTError, "Invalid endpoint #{endpoint}, should match '/<service>/.*'" unless %r{^/\w+/.*$}.match(endpoint)
 
         url = @api_url + endpoint
@@ -64,7 +64,11 @@ module OVH
         http = REST.build_http_object(uri.host, uri.port)
         http.use_ssl = true
         response = http.request(request)
-        result = response.body == "null" ? nil : JSON.parse([response.body].to_json)
+        if type != "json"
+          result = response.body == "null" ? nil : response.body
+        else
+          result = response.body == "null" ? nil : JSON.parse(response.body)
+        end
 
 
         unless response.is_a?(Net::HTTPSuccess)

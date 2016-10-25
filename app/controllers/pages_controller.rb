@@ -12,7 +12,7 @@ class PagesController < ApplicationController
     ovh = OVH::REST.new(ENV["apiKey"], ENV["appSecret"], ENV["consumerKey"])
 
     #checking if the domian_name is on ovh
-    all_domain = ovh.get("/domain/").first
+    all_domain = ovh.get("/domain/")
    if all_domain.include?(domain_name)
 
         # Get account status
@@ -37,8 +37,7 @@ class PagesController < ApplicationController
   def edit
     domain_name = params["ndd"]
     ovh = OVH::REST.new(ENV["apiKey"], ENV["appSecret"], ENV["consumerKey"])
-    raise
-    ovh.put("/domain/#{domain_name}", {"transferLockStatus"=>'unlocked'})
+    ovh.put("/domain/#{domain_name}", {"transferLockStatus"=>'unlocked', "type" => "text"})
     @is_unlocked = ovh.get("/domain/#{domain_name}")
     @auth = ovh.get("/domain/#{domain_name}/authInfo")
     #JSON.pretty_generate(@auth)
