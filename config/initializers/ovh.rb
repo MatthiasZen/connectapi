@@ -71,8 +71,9 @@ module OVH
         end
 
 
-        unless response.is_a?(Net::HTTPSuccess)
-          raise RESTError, "Error querying #{endpoint}: #{result["message"]}"
+        if response.is_a?(Net::HTTPSuccess) == false
+          result
+          #raise RESTError, "Error querying #{endpoint}: #{result["message"]}"
         end
 
         result
