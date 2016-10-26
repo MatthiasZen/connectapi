@@ -4,13 +4,12 @@
   <p>Ce nom de domaine a été créé le (Année/Mois/Jour): <%=@resultat["creation"]%></p>
   <p>Il expire le (Année/Mois/Jour): <%=@resultat["expiration"]%></p>
   <p>Le renouvellement se fait de manière: "<%=@resultat["renewalType"]%>"</p>
+  <p>Voici le code auth <%=@auth%></p>
   <p>Est-ce que le nom de domaine est déveroullé pour afficher le code Oauth?
-  <%=@is_locked["transferLockStatus"]%></p>
+  <%=@is_locked%></p>
 
     <%=form_tag(controller: "pages", action: "edit") do %>
     <%= hidden_field_tag :ndd, @resultat["domain"]%>
     <%= submit_tag("Déverouiller le nom de domaine") %>
     <%end%>
-
-
 </div>

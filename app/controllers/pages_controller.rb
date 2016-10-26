@@ -20,9 +20,9 @@ class PagesController < ApplicationController
         @resultat = ovh.get("/domain/#{domain_name}/serviceInfos")
 
         if ovh.get("/domain/#{domain_name}")["transferLockStatus"] == "unlocked"
-         redirect_to edit
+         @auth = ovh.get("/domain/#{domain_name}/authInfo", nil, "text")
         else
-          @is_locked = ovh.get("/domain/#{domain_name}")
+          @is_locked = "le nom de domaine est verrouillé"
         end
 
       else
@@ -36,20 +36,12 @@ class PagesController < ApplicationController
     ovh = OVH::REST.new(ENV["apiKey"], ENV["appSecret"], ENV["consumerKey"])
     ovh.put("/domain/#{domain_name}", {"transferLockStatus"=>'unlocked'})
     @is_unlocked = ovh.get("/domain/#{domain_name}")
-    @auth = ovh.get("/domain/#{domain_name}/authInfo", nil, "text")
-raise
+    #@auth = ovh.get("/domain/#{domain_name}/authInfo", nil, "text")
+    raise
   end
 
   def update
-    #ovh = OVH::REST.new(ENV["apiKey"], ENV["appSecret"], ENV["consumerKey"])
-    #domain_name = params["ndd"]
-    #@auth = ovh.get("/domain/#{domain_name}/authInfo")
-    #JSON.pretty_generate(@auth)
 
-
-    #puts JSON.pretty_generate(result)
-    #appeler à nouveau l'api ovh (aucune méthode ne focntionne pour ces appels)
-    #afficher le code auth
   end
 end
 
