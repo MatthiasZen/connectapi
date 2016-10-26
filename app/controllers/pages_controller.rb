@@ -34,10 +34,10 @@ class PagesController < ApplicationController
   def edit
     domain_name = params["ndd"]
     ovh = OVH::REST.new(ENV["apiKey"], ENV["appSecret"], ENV["consumerKey"])
-    ovh.put("/domain/#{domain_name}", {"transferLockStatus"=>'unlocked'}, {"type" => "text"})
+    ovh.put("/domain/#{domain_name}", {"transferLockStatus"=>'unlocked'})
     @is_unlocked = ovh.get("/domain/#{domain_name}")
-    @auth = ovh.get("/domain/#{domain_name}/authInfo" , {"type" => "text"})
-    raise
+    @auth = ovh.get("/domain/#{domain_name}/authInfo", nil, "text")
+raise
   end
 
   def update
