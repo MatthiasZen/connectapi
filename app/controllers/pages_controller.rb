@@ -19,10 +19,14 @@ class PagesController < ApplicationController
 
         @resultat = ovh.get("/domain/#{domain_name}/serviceInfos")
 
+        #get the auth code
+
         if ovh.get("/domain/#{domain_name}")["transferLockStatus"] == "unlocked"
          @auth = ovh.get("/domain/#{domain_name}/authInfo", nil, "text")
-        else
-          @is_locked = "le nom de domaine est verrouillé"
+          elsif ovh.get("/domain/#{domain_name}")["transferLockStatus"] == "unlocking"
+          @is_unlocking = "Le nom de domaine est en train de se déverouiller"
+         else
+          @is_locked = ovh.get("/domain/#{domain_name}")["transferLockStatus"]
         end
 
       else
@@ -37,11 +41,10 @@ class PagesController < ApplicationController
     ovh.put("/domain/#{domain_name}", {"transferLockStatus"=>'unlocked'})
     @is_unlocked = ovh.get("/domain/#{domain_name}")
     #@auth = ovh.get("/domain/#{domain_name}/authInfo", nil, "text")
-    raise
+    redirect_to 'show'
   end
 
   def update
-
   end
 end
 
