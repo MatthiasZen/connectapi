@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'gandi_api/index'
+
+  get 'gandi_api/show'
+
   get 'pages/update'
 
   root to: 'pages#index'
