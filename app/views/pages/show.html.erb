@@ -11,6 +11,7 @@
 
   <p><%=@is_unlocking%></p>
 
+
   <%if @is_locked%>
     <%=form_tag(controller: "pages", action: "edit") do %>
       <%= hidden_field_tag :ndd, @resultat["domain"]%>
@@ -18,3 +19,5 @@
       <%end%>
   <%end%>
 </div>
+
+
