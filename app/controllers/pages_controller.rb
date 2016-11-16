@@ -17,15 +17,16 @@ class PagesController < ApplicationController
 
         # Get account status
 
-        resultat = ovh.get("/domain/#{domain_name}/serviceInfos")
-        @resultat = JSON.parse  resultat.first.gsub('=>', ':')
+        @resultat = ovh.get("/domain/#{domain_name}/serviceInfos")
 
-        if ovh.get("/domain/#{domain_name}").first.include?('unlocked')
-         redirect_to edit
-        else
-          is_locked = ovh.get("/domain/#{domain_name}")
-          @is_locked = JSON.parse  is_locked.first.gsub('=>', ':')
-          JSON.pretty_generate(@is_locked)
+        #get the auth code
+
+        if ovh.get("/domain/#{domain_name}")["transferLockStatus"] == "unlocked"
+         @auth = ovh.get("/domain/#{domain_name}/authInfo", nil, "text")
+          elsif ovh.get("/domain/#{domain_name}")["transferLockStatus"] == "unlocking"
+          @is_unlocking = "Le nom de domaine est en train de se déverouiller"
+         else
+          @is_locked = ovh.get("/domain/#{domain_name}")["transferLockStatus"]
         end
 
       else
@@ -37,23 +38,13 @@ class PagesController < ApplicationController
   def edit
     domain_name = params["ndd"]
     ovh = OVH::REST.new(ENV["apiKey"], ENV["appSecret"], ENV["consumerKey"])
-    ovh.put("/domain/#{domain_name}", {"transferLockStatus"=>'unlocked', "type" => "text"})
+    ovh.put("/domain/#{domain_name}", {"transferLockStatus"=>'unlocked'})
     @is_unlocked = ovh.get("/domain/#{domain_name}")
-    @auth = ovh.get("/domain/#{domain_name}/authInfo")
-    #JSON.pretty_generate(@auth)
-
+    #@auth = ovh.get("/domain/#{domain_name}/authInfo", nil, "text")
+    redirect_to 'show'
   end
 
   def update
-    #ovh = OVH::REST.new(ENV["apiKey"], ENV["appSecret"], ENV["consumerKey"])
-    #domain_name = params["ndd"]
-    #@auth = ovh.get("/domain/#{domain_name}/authInfo")
-    #JSON.pretty_generate(@auth)
-
-
-    #puts JSON.pretty_generate(result)
-    #appeler à nouveau l'api ovh (aucune méthode ne focntionne pour ces appels)
-    #afficher le code auth
   end
 end
 

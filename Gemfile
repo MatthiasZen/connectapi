@@ -34,6 +34,7 @@ gem "binding_of_caller"
 gem "figaro"
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
 gem 'json', '~> 1.8', '>= 1.8.3'
+gem 'gandi'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
