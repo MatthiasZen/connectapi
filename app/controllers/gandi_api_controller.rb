@@ -3,10 +3,15 @@ class GandiApiController < ApplicationController
 
     api = Gandi::Session.new(ENV["GandiapiKey"], env: :test) # Endpoint: https://rpc.gandi.net/xmlrpc/
 
+    #params:
+    # params['auth'].gsub(/["]/, '') => "IWeh8bYdFlEm"
+    # params['ndd']=> "mobicafe.fr"
+
+
     api.domain.transferin.available('mobicafe.fr', authinfo = 'X2pNNIqKdBTL') #transférer le NDD name to this controller ,'X2pNNIqKdBTL'
 
      #midifier les infos ci-dessous pour voir si le transfert fonctionne
-
+     raise
      contact_spec = {
     'city' => 'Paris',
     'country' => 'FR',

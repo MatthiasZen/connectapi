@@ -6,7 +6,12 @@
   <p>Le renouvellement se fait de manière: "<%=@resultat["renewalType"]%>"</p>
 
   <%if @auth%>
-    <p>Voici le code auth <%=@auth%></p>
+  <p>Voici le code Auth:<%=@auth%></p>
+    <%=form_tag(controller: "gandi_api", action: "index") do %>
+      <%= hidden_field_tag :ndd, @resultat["domain"]%>
+      <%= hidden_field_tag :auth, @auth%>
+      <%= submit_tag "Transférer sur Gandi", class: "btn btn-danger" %>
+      <%end%>
   <%end%>
 
   <p><%=@is_unlocking%></p>
@@ -15,7 +20,7 @@
   <%if @is_locked%>
     <%=form_tag(controller: "pages", action: "edit") do %>
       <%= hidden_field_tag :ndd, @resultat["domain"]%>
-      <%= submit_tag("Déverouiller le nom de domaine") %>
+      <%= submit_tag "Déverouiller le nom de domaine", class: "btn btn-Succes" %>
       <%end%>
   <%end%>
 </div>

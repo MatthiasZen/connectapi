@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'gandi_api/index'
+  post 'gandi_api/index'
 
   get 'gandi_api/show'
 
