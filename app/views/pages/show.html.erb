@@ -7,7 +7,7 @@
 
   <%if @auth%>
   <p>Voici le code Auth:<%=@auth%></p>
-    <%=form_tag(controller: "gandi_api", action: "index") do %>
+    <%=form_tag(controller: "gandi_api", action: "update") do %>
       <%= hidden_field_tag :ndd, @resultat["domain"]%>
       <%= hidden_field_tag :auth, @auth%>
       <%= submit_tag "Transférer sur Gandi", class: "btn btn-danger" %>

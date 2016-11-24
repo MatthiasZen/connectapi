@@ -1,2 +1,11 @@
-<h1>GandiApi#index</h1>
-<p>Find me in app/views/gandi_api/index.html.erb</p>
+<div class="container">
+  <h1 class= 'text-center'>Tableau des activités sur les NDD</h1>
+
+  <%(@status_of_operation).each do |s|%>
+  <%= infos = s.to_json %>
+  <h1>
+  <%= JSON.parse(infos)["params"]["domain"]%>
+  </h1>
+  <%= JSON.parse(infos)["step"]%>
+  <%end%>
+</div>

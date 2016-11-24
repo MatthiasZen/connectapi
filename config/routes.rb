@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-  post 'gandi_api/index'
+  get 'gandi_api/index'
 
   get 'gandi_api/show'
+
+  post 'gandi_api/update'
 
   get 'pages/update'
 
