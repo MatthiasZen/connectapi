@@ -1,11 +1,22 @@
 <div class="container">
-  <h1 class= 'text-center'>Tableau des activités sur les NDD</h1>
+  <div class="text-center">
+    <h1>Tableau des activités sur les NDD</h1>
+    <%(@status_of_operation).each do |s|%>
+    <!--<%= infos = s.to_json %>-->
+    <h1>
+    <%= JSON.parse(infos)["params"]["domain"]%>
+    </h1>
+    <p>Date de mise à jour:
+    <%=JSON.parse(infos)["date_updated"]["day"]%>
+    <%=JSON.parse(infos)["date_updated"]["month"]%>
+    <%=JSON.parse(infos)["date_updated"]["year"]%>
+    </p>
+    <p>Etape: <%= JSON.parse(infos)["step"]%></p>
+    <p>Id de l'opération: <%=JSON.parse(infos)["id"]%></p>
+    <%end%>
 
-  <%(@status_of_operation).each do |s|%>
-  <%= infos = s.to_json %>
-  <h1>
-  <%= JSON.parse(infos)["params"]["domain"]%>
-  </h1>
-  <%= JSON.parse(infos)["step"]%>
-  <%end%>
+    <form action="/" method="get">
+      <input type="submit" value = "Page d'accueil", class = "">
+    </form>
+  </div>
 </div>

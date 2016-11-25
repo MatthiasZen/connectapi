@@ -14,7 +14,7 @@ class GandiApiController < ApplicationController
     ndd = params['ndd']
     authcode = params['auth'].gsub(/["]/, '')
 
-    api.domain.transferin.available(ndd, authinfo =  authcode) #transférer le NDD name to this controller ,'X2pNNIqKdBTL'
+    api.domain.transferin.available(ndd, authcode) #transférer le NDD name to this controller ,'X2pNNIqKdBTL'
 
 
 
@@ -43,12 +43,15 @@ class GandiApiController < ApplicationController
     'admin' => 'MV44-GANDI',
     'tech' => 'MV44-GANDI',
     'bill' => 'MV44-GANDI',
+    #'authinfo' => authcode,
     }
 
 
     api.domain.transferin.proceed(ndd, transfer_spec)
 
     api.operation.info(oper_id)
+
+    #mettre un redirect to gandi_api/index
 
   end
 
