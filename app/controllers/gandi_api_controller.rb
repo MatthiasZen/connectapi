@@ -51,7 +51,7 @@ class GandiApiController < ApplicationController
 
     api.operation.info(oper_id)
 
-    #mettre un redirect to gandi_api/index
+    redirect_to 'index'
 
   end
 

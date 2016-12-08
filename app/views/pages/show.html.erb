@@ -1,12 +1,19 @@
-<div class="text-center">
+<div class="text-center show">
   <h1>Information sur <%=@resultat["domain"]%></h1>
 
   <p>Ce nom de domaine a été créé le (Année/Mois/Jour): <%=@resultat["creation"]%></p>
   <p>Il expire le (Année/Mois/Jour): <%=@resultat["expiration"]%></p>
   <p>Le renouvellement se fait de manière: "<%=@resultat["renewalType"]%>"</p>
 
+  <%if @email == "contact"%>
+    <% var1 = "@" %>
+    <p>Voici l'email de contact asoccié au NDD:  <%=@email + "#{var1}" + @resultat["domain"]%></p>
+    <%else%>
+    <p>Il n'y a pas d'email de contact associét à ce compte</p>
+  <%end%>
+
   <%if @auth%>
-  <p>Voici le code Auth:<%=@auth%></p>
+  <p id="auth">Voici le code Auth:<%=@auth%></p>
     <%=form_tag(controller: "gandi_api", action: "update") do %>
       <%= hidden_field_tag :ndd, @resultat["domain"]%>
       <%= hidden_field_tag :auth, @auth%>
@@ -26,3 +33,6 @@
 </div>
 
 
+<script>
+  var x = @resultat["domain"]
+</script>

@@ -18,6 +18,7 @@ class PagesController < ApplicationController
         # Get account status
 
         @resultat = ovh.get("/domain/#{domain_name}/serviceInfos")
+        @email = ovh.get("/email/domain/#{domain_name}/account").first
 
         #get the auth code
 
@@ -30,7 +31,7 @@ class PagesController < ApplicationController
         end
 
       else
-        flash[:alert] = "Le nom de domaine n'existe pas ou doit être au format ndd.fr ou ndd.com"
+        flash[:alert] = "Le nom de domaine n'existe pas ou n'est pas au format ndd.fr ou ndd.com"
         redirect_to root_path
     end
   end
