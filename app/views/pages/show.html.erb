@@ -9,7 +9,11 @@
     <% var1 = "@" %>
     <p>Voici l'email de contact asoccié au NDD:  <%=@email + "#{var1}" + @resultat["domain"]%></p>
     <%else%>
-    <p>Il n'y a pas d'email de contact associét à ce compte</p>
+    <p>Il n'y a pas d'email de contact associé à ce compte</p>
+  <%end%>
+
+  <%if @get_alias_id.count > 1%>
+    <p class="disclamer-color">Attention il y a des alias: De: <%=@alias['from']%>  A: <%=@alias['to']%></p>
   <%end%>
 
   <%if @auth%>
@@ -27,7 +31,7 @@
   <%if @is_locked%>
     <%=form_tag(controller: "pages", action: "edit") do %>
       <%= hidden_field_tag :ndd, @resultat["domain"]%>
-      <%= submit_tag "Déverouiller le nom de domaine", class: "btn btn-Succes" %>
+      <%= submit_tag "Déverouiller le nom de domaine", class: "btn btn-success" %>
       <%end%>
   <%end%>
 </div>

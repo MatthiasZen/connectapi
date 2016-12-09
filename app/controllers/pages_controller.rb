@@ -18,7 +18,15 @@ class PagesController < ApplicationController
         # Get account status
 
         @resultat = ovh.get("/domain/#{domain_name}/serviceInfos")
+
+        #Get the email associated to the acocunt
         @email = ovh.get("/email/domain/#{domain_name}/account").first
+
+        #Get the alias redirection
+        @get_alias_id = ovh.get("/email/domain/#{domain_name}/redirection")
+        @get_alias_id.each do |a|
+           @alias = ovh.get("/email/domain/#{domain_name}/redirection/#{a}")
+        end
 
         #get the auth code
 
