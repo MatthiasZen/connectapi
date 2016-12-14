@@ -1,4 +1,4 @@
-<div class="wrapper text-center bla">
+<div class="wrapper text-center">
   <div class="container">
     <h1 class="test-color">Bienvenue !</h1>
     <% if flash[:alert] %>
@@ -22,16 +22,15 @@
         <input type="submit" value = "Voir", class = "btn btn-lg btn-primary btn-block ">
       </form>
     </div>
+
+    <div class="margin-40-top">
+      <form action="expire" method="get" class= "form-signin">
+        <p class="form-signin-heading">Voir les NDD qui expirent dans un mois et moins</p>
+        <input type="submit" value = "Voir", class = "btn btn-lg btn-primary btn-block ">
+      </form>
+    </div>
   </div>
 </div>
 
 
-<!--
-<script>
-function refreshPage(){
-    setTimeout(function () {
-    window.location.reload(1);
-}, 10000);
-}
-</script>
--->
+

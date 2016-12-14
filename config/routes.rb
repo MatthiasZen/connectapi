@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   get 'pages/update'
 
   root to: 'pages#index'
-  get    "pages/:id",      to: "pages#show"
+  get "pages/:id", to: "pages#show"
+  get "expire", to: "pages#expire"
   post "pages/:id", to: "pages#edit"
   put "pages/:id", to: "pages#update"
 

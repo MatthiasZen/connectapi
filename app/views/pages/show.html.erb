@@ -14,6 +14,8 @@
 
   <%if @get_alias_id.count > 1%>
     <p class="disclamer-color">Attention il y a des alias: De: <%=@alias['from']%>  A: <%=@alias['to']%></p>
+    <%else%>
+    <p>Il n'y a pas d'alias</p>
   <%end%>
 
   <%if @auth%>
@@ -34,9 +36,12 @@
       <%= submit_tag "Déverouiller le nom de domaine", class: "btn btn-success" %>
       <%end%>
   <%end%>
+
+<form action="/" method="get">
+      <input type="submit" value = "Page d'accueil", class = "btn btn-primary margin-40-top">
+</form>
+
 </div>
 
 
-<script>
-  var x = @resultat["domain"]
-</script>
+

@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <p class="text-center">index expire</p>
+      <%@arry.each do |info|%>
+        <%info["domain"]%>
+        <% exp =  info["expiration"]%>
+        <% date = Date.parse exp%>
+        <% Date.today %>
+        <% diff = Date.today - date %>
+        <%diff.to_i %>
+        <% if diff > -30 %>
+          <ul>
+            <%=info["domain"]%>
+            <%= exp =  info["expiration"]%>
+            <%=form_tag(controller: "pages" action: ":id") do %>
+              <%= hidden_field_tag :ndd, info["domain"]%>
+              <%= submit_tag "Voir les infos du nom de domaine", class: "btn btn-success" %>
+            <%end%>
+          </ul>
+        <%end%>
+      <%end%>
+  </div>
+</div>

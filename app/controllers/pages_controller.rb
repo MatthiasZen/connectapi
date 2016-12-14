@@ -1,6 +1,22 @@
 class PagesController < ApplicationController
 
   def index
+    #root
+  end
+
+  def expire
+
+    ovh = OVH::REST.new(ENV["apiKey"], ENV["appSecret"], ENV["consumerKey"])
+    all_domain = ovh.get("/domain/").first(50)
+
+    @arry = all_domain.map { |arr| ovh.get("/domain/#{arr}/serviceInfos")}
+
+      # convertir la date qui est une string en Date
+      # mettre la date d'aujourd'hui
+      # la soustraire avec celle d'expiration
+      # n'afficher les noms de domaine que si la date d'expliration est dans un mois ou moins
+
+
   end
 
   def show
