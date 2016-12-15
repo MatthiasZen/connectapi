@@ -8,7 +8,7 @@ class PagesController < ApplicationController
 
     ovh = OVH::REST.new(ENV["apiKey"], ENV["appSecret"], ENV["consumerKey"])
     all_domain = ovh.get("/domain/").first(50)
-
+    @all_domain_count = all_domain.count
     @arry = all_domain.map { |arr| ovh.get("/domain/#{arr}/serviceInfos")}
 
       # convertir la date qui est une string en Date
