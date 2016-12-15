@@ -1,6 +1,22 @@
 class PagesController < ApplicationController
 
   def index
+    #root
+  end
+
+  def expire
+
+    ovh = OVH::REST.new(ENV["apiKey"], ENV["appSecret"], ENV["consumerKey"])
+    all_domain = ovh.get("/domain/").first(50)
+    @all_domain_count = all_domain.count
+    @arry = all_domain.map { |arr| ovh.get("/domain/#{arr}/serviceInfos")}
+
+      # convertir la date qui est une string en Date
+      # mettre la date d'aujourd'hui
+      # la soustraire avec celle d'expiration
+      # n'afficher les noms de domaine que si la date d'expliration est dans un mois ou moins
+
+
   end
 
   def show
@@ -19,6 +35,15 @@ class PagesController < ApplicationController
 
         @resultat = ovh.get("/domain/#{domain_name}/serviceInfos")
 
+        #Get the email associated to the acocunt
+        @email = ovh.get("/email/domain/#{domain_name}/account").first
+
+        #Get the alias redirection
+        @get_alias_id = ovh.get("/email/domain/#{domain_name}/redirection")
+        @get_alias_id.each do |a|
+           @alias = ovh.get("/email/domain/#{domain_name}/redirection/#{a}")
+        end
+
         #get the auth code
 
         if ovh.get("/domain/#{domain_name}")["transferLockStatus"] == "unlocked"
@@ -30,7 +55,7 @@ class PagesController < ApplicationController
         end
 
       else
-        flash[:alert] = "Le nom de domaine n'existe pas ou doit être au format ndd.fr ou ndd.com"
+        flash[:alert] = "Le nom de domaine n'existe pas ou n'est pas au format ndd.fr ou ndd.com"
         redirect_to root_path
     end
   end

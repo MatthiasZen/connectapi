@@ -1,3 +1,51 @@
 // Place all the styles related to the pages controller here.
 // They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+// You can use Sass (SCSS) here: http://sass-lang.com/ {
+
+.wrapper{
+  background-size: cover !important;
+  background-color: #EEEEEE;
+  height: 100%;
+  width: 100%;
+  height: 100vh;
+}
+
+.form-signin {
+  max-width: 380px;
+  padding: 50px 35px 60px;
+  margin: 0 auto;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 10px;
+}
+
+.form-signin-heading{
+  padding-bottom: 15px;
+}
+
+.form-control {
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+}
+
+.form-margin{
+  margin-bottom: 15px;
+}
+
+.margin-40-top{
+  margin-top: 40px;
+}
+
+.disclamer-color{
+  color:  rgba(215, 40, 40, 0.9);
+}
+
+.margin-80-bottom {
+  margin-bottom: 80px;
+}
+
+p {
+  font-size: 16px;
+}
