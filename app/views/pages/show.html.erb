@@ -1,47 +1,47 @@
-<div class="text-center show">
-  <h1>Information sur <%=@resultat["domain"]%></h1>
+<div class="wrapper">
+  <div class="text-center">
+    <h1>Information sur <%=@resultat["domain"]%></h1>
 
-  <p>Ce nom de domaine a été créé le (Année/Mois/Jour): <%=@resultat["creation"]%></p>
-  <p>Il expire le (Année/Mois/Jour): <%=@resultat["expiration"]%></p>
-  <p>Le renouvellement se fait de manière: "<%=@resultat["renewalType"]%>"</p>
+    <p>Ce nom de domaine a été créé le (Année/Mois/Jour): <%=@resultat["creation"]%></p>
+    <p>Il expire le (Année/Mois/Jour): <%=@resultat["expiration"]%></p>
+    <p>Le renouvellement se fait de manière: "<%=@resultat["renewalType"]%>"</p>
 
-  <%if @email == "contact"%>
-    <% var1 = "@" %>
-    <p>Voici l'email de contact asoccié au NDD:  <%=@email + "#{var1}" + @resultat["domain"]%></p>
-    <%else%>
-    <p>Il n'y a pas d'email de contact associé à ce compte</p>
-  <%end%>
+    <%if @email == "contact"%>
+      <% var1 = "@" %>
+      <p>Voici l'email de contact asoccié au NDD:  <%=@email + "#{var1}" + @resultat["domain"]%></p>
+      <%else%>
+      <p>Il n'y a pas d'email de contact associé à ce compte</p>
+    <%end%>
 
-  <%if @get_alias_id.count > 1%>
-    <p class="disclamer-color">Attention il y a des alias: De: <%=@alias['from']%>  A: <%=@alias['to']%></p>
-    <%else%>
-    <p>Il n'y a pas d'alias</p>
-  <%end%>
+    <%if @get_alias_id.count > 1%>
+      <p class="disclamer-color">Attention il y a des alias: De: <%=@alias['from']%>  A: <%=@alias['to']%></p>
+      <%else%>
+      <p>Il n'y a pas d'alias</p>
+    <%end%>
 
-  <%if @auth%>
-  <p id="auth">Voici le code Auth:<%=@auth%></p>
-    <%=form_tag(controller: "gandi_api", action: "update") do %>
-      <%= hidden_field_tag :ndd, @resultat["domain"]%>
-      <%= hidden_field_tag :auth, @auth%>
-      <%= submit_tag "Transférer sur Gandi", class: "btn btn-danger" %>
-      <%end%>
-  <%end%>
+    <%if @auth%>
+    <p id="auth">Voici le code Auth:<%=@auth%></p>
+      <%=form_tag(controller: "gandi_api", action: "update") do %>
+        <%= hidden_field_tag :ndd, @resultat["domain"]%>
+        <%= hidden_field_tag :auth, @auth%>
+        <%= submit_tag "Transférer sur Gandi", class: "btn btn-danger" %>
+        <%end%>
+    <%end%>
 
-  <p><%=@is_unlocking%></p>
+    <p><%=@is_unlocking%></p>
 
 
-  <%if @is_locked%>
-    <%=form_tag(controller: "pages", action: "edit") do %>
-      <%= hidden_field_tag :ndd, @resultat["domain"]%>
-      <%= submit_tag "Déverouiller le nom de domaine", class: "btn btn-success" %>
-      <%end%>
-  <%end%>
+    <%if @is_locked%>
+      <%=form_tag(controller: "pages", action: "edit") do %>
+        <%= hidden_field_tag :ndd, @resultat["domain"]%>
+        <%= submit_tag "Déverouiller le nom de domaine", class: "btn btn-success" %>
+        <%end%>
+    <%end%>
 
-<form action="/" method="get">
-      <input type="submit" value = "Page d'accueil", class = "btn btn-primary margin-40-top">
-</form>
-
+    <form action="/" method="get">
+          <input type="submit" value = "Page d'accueil", class = "btn btn-primary margin-40-top">
+    </form>
+  </div>
 </div>
-
 
 
