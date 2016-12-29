@@ -1,20 +1,24 @@
 <div class="container">
   <div class="text-center">
     <h1>Tableau des activités sur les NDD</h1>
-    <%(@status_of_operation).each do |s|%>
-    <!--<%= infos = s.to_json %>-->
-    <h1>
-    <%= JSON.parse(infos)["params"]["domain"]%>
-    </h1>
-    <p>Date de mise à jour:
-    <%=JSON.parse(infos)["date_updated"]["day"]%>
-    <%=JSON.parse(infos)["date_updated"]["month"]%>
-    <%=JSON.parse(infos)["date_updated"]["year"]%>
-    </p>
-    <p>Etape: <%= JSON.parse(infos)["step"]%></p>
-    <p>Id de l'opération: <%=JSON.parse(infos)["id"]%></p>
-    <%end%>
 
+    <%if @status_of_operation != nil%>
+      <%(@status_of_operation).each do |s|%>
+      <!--<%= infos = s.to_json %>-->
+      <h2>
+      <%= JSON.parse(infos)["params"]["domain"]%>
+      </h2>
+      <p>Date de mise à jour:
+      <%=JSON.parse(infos)["date_updated"]["day"]%>
+      <%=JSON.parse(infos)["date_updated"]["month"]%>
+      <%=JSON.parse(infos)["date_updated"]["year"]%>
+      </p>
+      <p>Etape: <%= JSON.parse(infos)["step"]%></p>
+      <p>Id de l'opération: <%=JSON.parse(infos)["id"]%></p>
+      <%end%>
+      <%else%>
+      <p>Il n'y a pas d'opérations en cours</p>
+    <%end%>
     <form action="/" method="get">
       <input type="submit" value = "Page d'accueil", class = "btn btn-primary">
     </form>
