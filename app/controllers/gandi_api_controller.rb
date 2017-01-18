@@ -2,7 +2,11 @@ class GandiApiController < ApplicationController
 
   def index
     api = Gandi::Session.new(ENV["GandiapiKey"])
-    @status_of_operation = api.operation.list({'type': 'domain_transfer_in'})
+
+    ndd = params['ndd_in_process']
+
+    @status_of_operation = api.operation.list({'domain': ndd, 'type': 'domain_transfer_in'})
+
   end
 
   def show
@@ -15,24 +19,6 @@ class GandiApiController < ApplicationController
     authcode = params['auth'].gsub(/["]/, '')
 
     api.domain.transferin.available(ndd, authcode) #transférer le NDD name to this controller ,'X2pNNIqKdBTL'
-
-
-    # thi method if to create a contact but in teh test env whe still have 50 contacts
-     #contact_spec = {
-    #'city' => 'Paris',
-    #'country' => 'FR',
-    #'email' => 'jmatthias@zenchef.com',
-    #'family' => 'Vitte',
-    #'given' => 'Matthias',
-    #'password' => '0000000',
-    #'phone' => '0688833732',
-    #'streetaddr' => '120 rue Reaumur 75002',
-    #'type' => 0,
-    #'zip'=> "75002",
-    #}
-
-
-    #api.contact.create(contact_spec)
 
     association_spec = {
       'domain' => ndd,
@@ -48,13 +34,11 @@ class GandiApiController < ApplicationController
     'authinfo' => authcode,
     }
 
-
-
     api.domain.transferin.proceed(ndd, transfer_spec)
 
-
+    api.operation.list({'domain': ndd, 'type': 'domain_transfer_in'})
     #api.operation
-    #api.operation.info(oper_id)
+   operation_id = api.operation.list({'domain': ndd, 'type': 'domain_transfer_in'}).last.step
 
     redirect_to 'index'
 

@@ -1,36 +1,42 @@
 <div class="wrapper text-center">
   <div class="container">
-    <h1 class="test-color margin-80-bottom">Bienvenue !</h1>
+    <h1 class="fs-title margin-80-bottom">Bienvenue !</h1>
     <% if flash[:alert] %>
         <div class="notice alert alert-danger role="alert""><%= flash[:alert] %></div>
       <% end %>
+
       <!--Form to unlock the domain name-->
 
-    <form action="/pages/:id" method="get" class= "form-signin">
-      <p class="form-signin-heading">Entrez un nom de domaine à déverouiller</p>
-      <input type="text" name="ndd" placeholder="exemple.fr" class="form-control form-margin">
-      <input type="submit" value = "Valider", class = "btn btn-lg btn-primary btn-block">
+    <form action="/pages/:id" method="get" id="msform">
+      <fieldset>
+        <p class="fs-subtitle">Entrez un nom de domaine à déverouiller</p>
+        <input type="text" name="ndd" placeholder="exemple.fr" class="form-control form-margin">
+        <input type="submit" value = "Valider", class = "next action-button">
+      </fieldset>
     </form>
-
-
-    <!-- test <button class=" test-js btn btn-primary" onClick="refreshPage()"></button>-->
 
     <!--Form to show where are the differents transfert steps-->
     <div class="margin-40-top">
-      <form action="/gandi_api/index" method="get" class= "form-signin">
-        <p class="form-signin-heading">Etape des derniers transferts de noms de domaines</p>
-        <input type="submit" value = "Voir", class = "btn btn-lg btn-primary btn-block ">
+      <form action="/gandi_api/index" method="get" id="msform">
+       <fieldset>
+          <p class="fs-subtitle">Etape des derniers transferts de noms de domaines d'OVH à Gandi</p>
+          <input type="text" name="ndd_in_process" placeholder="exemple.fr" class="form-control form-margin">
+          <input type="submit" value = "Voir", class = "next action-button">
+        </fieldset>
       </form>
     </div>
 
     <div class="margin-40-top">
-      <form action="expire" method="get" class= "form-signin">
-        <p class="form-signin-heading">Voir les NDD qui expirent dans un mois et moins</p>
-        <input type="submit" value = "Voir", class = "btn btn-lg btn-primary btn-block", data-toggle="tooltip" data-placement="right" title="ATTENTION: l'action met plusieurs minutes à s'exécuter. Profites-en pour faire une bonne pause ; )">
+      <form action="expire" method="get" id="msform">
+       <fieldset>
+        <p class="fs-subtitle">Voir les NDD qui expirent dans un mois et moins sur OVH</p>
+        <input type="submit" value = "Voir", class = "next action-button", data-toggle="tooltip" data-placement="right" title="ATTENTION: l'action met plusieurs minutes à s'exécuter. Profites-en pour faire une bonne pause ; )">
+        </fieldset>
       </form>
     </div>
   </div>
 </div>
+
 
 
 <script>

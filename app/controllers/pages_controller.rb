@@ -11,12 +11,6 @@ class PagesController < ApplicationController
     @all_domain_count = all_domain.count
     @arry = all_domain.map { |arr| ovh.get("/domain/#{arr}/serviceInfos")}
 
-      # convertir la date qui est une string en Date
-      # mettre la date d'aujourd'hui
-      # la soustraire avec celle d'expiration
-      # n'afficher les noms de domaine que si la date d'expliration est dans un mois ou moins
-
-
   end
 
   def show
@@ -26,6 +20,10 @@ class PagesController < ApplicationController
     #calling the OVH REST gem
 
     ovh = OVH::REST.new(ENV["apiKey"], ENV["appSecret"], ENV["consumerKey"])
+
+    #calling the Gandi API
+
+    api = Gandi::Session.new(ENV["GandiapiKey"])
 
     #checking if the domian_name is on ovh
     all_domain = ovh.get("/domain/")
@@ -47,11 +45,12 @@ class PagesController < ApplicationController
         #get the auth code
 
         if ovh.get("/domain/#{domain_name}")["transferLockStatus"] == "unlocked"
-         @auth = ovh.get("/domain/#{domain_name}/authInfo", nil, "text")
+            @auth = ovh.get("/domain/#{domain_name}/authInfo", nil, "text")
+            @gandi_operation_running = api.operation.list({'domain': domain_name, 'type': 'domain_transfer_in'})
           elsif ovh.get("/domain/#{domain_name}")["transferLockStatus"] == "unlocking"
-          @is_unlocking = "Le nom de domaine est en train de se déverouiller"
-         else
-          @is_locked = ovh.get("/domain/#{domain_name}")["transferLockStatus"]
+            @is_unlocking = "Le nom de domaine est en train de se déverouiller"
+          else
+            @is_locked = ovh.get("/domain/#{domain_name}")["transferLockStatus"]
         end
 
       else

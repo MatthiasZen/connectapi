@@ -20,13 +20,17 @@
             <p>Il n'y a pas d'alias</p>
           <%end%>
 
-          <%if @auth%>
-          <p id="auth">Voici le code Auth:<%=@auth%></p>
+          <%if @auth && @gandi_operation_running == []%>
+
+            <p id="auth">Voici le code Auth:<%=@auth%></p>
             <%=form_tag(controller: "gandi_api", action: "update") do %>
               <%= hidden_field_tag :ndd, @resultat["domain"]%>
               <%= hidden_field_tag :auth, @auth%>
               <%= submit_tag "Transférer sur Gandi", class: "btn btn-danger" %>
               <%end%>
+            <%else%>
+            <p>Une action est déjà en cours sur ce nom de domaine</p>
+            <!--mettre le bouton pour rediriger sur l'id de l'operation gandi-->
           <%end%>
 
           <p><%=@is_unlocking%></p>
