@@ -3,9 +3,13 @@ class GandiApiController < ApplicationController
   def index
     api = Gandi::Session.new(ENV["GandiapiKey"])
 
-    ndd = params['ndd_in_process']
-
-    @status_of_operation = api.operation.list({'domain': ndd, 'type': 'domain_transfer_in'})
+    domain_name = params['ndd_in_process']
+    if domain_name != ""
+    @status_of_operation = api.operation.list({'domain': domain_name, 'type': 'domain_transfer_in'})
+    else
+      flash[:alert] = "Le nom de domaine est vide!"
+      redirect_to root_path
+    end
 
   end
 
@@ -13,12 +17,11 @@ class GandiApiController < ApplicationController
   end
 
   def update
-    api = Gandi::Session.new(ENV["GandiapiKey"]) # Endpoint: https://rpc.gandi.net/xmlrpc/
-
+    api = Gandi::Session.new(ENV["GandiapiKey"])
     ndd = params['ndd']
     authcode = params['auth'].gsub(/["]/, '')
 
-    api.domain.transferin.available(ndd, authcode) #transférer le NDD name to this controller ,'X2pNNIqKdBTL'
+    api.domain.transferin.available(ndd, authcode)
 
     association_spec = {
       'domain' => ndd,
@@ -35,10 +38,6 @@ class GandiApiController < ApplicationController
     }
 
     api.domain.transferin.proceed(ndd, transfer_spec)
-
-    api.operation.list({'domain': ndd, 'type': 'domain_transfer_in'})
-    #api.operation
-   operation_id = api.operation.list({'domain': ndd, 'type': 'domain_transfer_in'}).last.step
 
     redirect_to 'index'
 

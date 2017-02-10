@@ -1,8 +1,8 @@
 <div class="wrapper">
   <div class="container">
     <div class="text-center">
-      <h1 class="margin-80-bottom">Information sur <%=@resultat["domain"]%></h1>
-        <div class="margin-80-bottom">
+      <h1 class="fs-title">Information sur <%=@resultat["domain"]%></h1>
+        <div class="fs-subtitle">
           <p>Ce nom de domaine a été créé le (Année/Mois/Jour): <%=@resultat["creation"]%></p>
           <p>Il expire le (Année/Mois/Jour): <%=@resultat["expiration"]%></p>
           <p>Le renouvellement se fait de manière: "<%=@resultat["renewalType"]%>"</p>
@@ -23,14 +23,17 @@
           <%if @auth && @gandi_operation_running == []%>
 
             <p id="auth">Voici le code Auth:<%=@auth%></p>
-            <%=form_tag(controller: "gandi_api", action: "update") do %>
-              <%= hidden_field_tag :ndd, @resultat["domain"]%>
-              <%= hidden_field_tag :auth, @auth%>
-              <%= submit_tag "Transférer sur Gandi", class: "btn btn-danger" %>
+              <%=form_tag(controller: "gandi_api", action: "update") do %>
+                <%= hidden_field_tag :ndd, @resultat["domain"]%>
+                <%= hidden_field_tag :auth, @auth%>
+                <%= submit_tag "Transférer sur Gandi", class: "btn btn-danger" %>
               <%end%>
             <%else%>
             <p>Une action est déjà en cours sur ce nom de domaine</p>
-            <!--mettre le bouton pour rediriger sur l'id de l'operation gandi-->
+              <%=form_tag("/gandi_api/index", :method => :get, :id => "msform" ) do %>
+                <%= hidden_field_tag :ndd_in_process, @resultat["domain"]%>
+                <%= submit_tag "Voir l'étape sur gandi", class: "next action-button-lg" %>
+              <%end%>
           <%end%>
 
           <p><%=@is_unlocking%></p>
@@ -43,8 +46,8 @@
           <%end%>
       <%end%>
 
-      <form action="/" method="get">
-            <input type="submit" value = "Page d'accueil", class = "btn btn-primary margin-40-top">
+      <form action="/" method="get", id="msform">
+            <input type="submit" value = "Page d'accueil", class = "next action-button">
       </form>
     </div>
   </div>

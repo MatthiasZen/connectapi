@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
 
+
   def index
     #root
   end
@@ -7,7 +8,7 @@ class PagesController < ApplicationController
   def expire
 
     ovh = OVH::REST.new(ENV["apiKey"], ENV["appSecret"], ENV["consumerKey"])
-    all_domain = ovh.get("/domain/").first(50)
+    all_domain = ovh.get("/domain/").first(100)
     @all_domain_count = all_domain.count
     @arry = all_domain.map { |arr| ovh.get("/domain/#{arr}/serviceInfos")}
 
@@ -70,6 +71,7 @@ class PagesController < ApplicationController
 
   def update
   end
+
 end
 
 

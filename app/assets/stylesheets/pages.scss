@@ -3,6 +3,10 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/ {
 
 //
+.wrapper{
+  margin-top:50px;
+}
+
 
 /*form styles*/
 #msform {
@@ -52,15 +56,43 @@
   padding: 10px 5px;
   margin: 10px 5px;
 }
+
+.action-button {
+  width: 100px;
+  background: #27AE60;
+  font-weight: bold;
+  color: white;
+  border: 0 none;
+  border-radius: 1px;
+  cursor: pointer;
+  padding: 10px 5px;
+  margin: 10px 5px;
+}
+
+#msform .action-button-lg {
+  width: 150px;
+  background: #D9534F;
+  font-weight: bold;
+  color: white;
+  border: 0 none;
+  border-radius: 1px;
+  cursor: pointer;
+  padding: 10px 5px;
+  margin: 10px 5px;
+}
 #msform .action-button:hover, #msform .action-button:focus {
   box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+}
+
+#msform .action-button-lg:hover, #msform .action-button-lg:focus {
+  box-shadow: 0 0 0 2px white, 0 0 0 3px #D9534F;
 }
 /*headings*/
 .fs-title {
   font-size: 15px;
   text-transform: uppercase;
   color: #2C3E50;
-  margin-bottom: 10px;
+  margin-bottom: 40px;
 }
 .fs-subtitle {
   font-weight: normal;

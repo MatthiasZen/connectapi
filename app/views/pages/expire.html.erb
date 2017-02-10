@@ -1,8 +1,8 @@
 <div class="wrapper">
   <div class="container">
     <div class="row">
-      <h1 class="text-center">NDD qui expirent dans mois d'un mois</h1>
-        <strong><p class="text-center margin-80-bottom">Il reste <%=@all_domain_count%> noms de domaine sur OVH</p></strong>
+      <h1 class="text-center fs-title">NDD qui expirent dans mois d'un mois</h1>
+        <strong><p class="text-center fs-subtitle">Il reste <%=@all_domain_count%> noms de domaine sur OVH</p></strong>
         <%@arry.each do |info|%>
           <%info["domain"]%>
           <% exp =  info["expiration"]%>
@@ -18,10 +18,10 @@
             <div class="col-md-4 col-xs-12">
               <%= date.strftime("%d/%m/%Y")%>
             </div>
-            <div class="col-md-4 col-xs-12 form-margin">
+            <div class="col-md-4 col-xs-12">
               <%=form_tag("/pages/:id", method: :get) do %>
                 <%= hidden_field_tag :ndd, info["domain"]%>
-                <%= submit_tag "Voir les infos du nom de domaine", class: "btn btn-success", :formtarget => "_blank" %>
+                <%= submit_tag "Voir les infos du nom de domaine", class: "next action-button", :formtarget => "_blank" %>
               <%end%>
             </div>
             </ul>
@@ -30,3 +30,4 @@
     </div>
   </div>
 </div>
+
