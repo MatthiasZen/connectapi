@@ -64,8 +64,10 @@ class PagesController < ApplicationController
     domain_name = params["ndd"]
     ovh = OVH::REST.new(ENV["apiKey"], ENV["appSecret"], ENV["consumerKey"])
     ovh.put("/domain/#{domain_name}", {"transferLockStatus"=>'unlocked'})
-    @is_unlocked = ovh.get("/domain/#{domain_name}")
-    #@auth = ovh.get("/domain/#{domain_name}/authInfo", nil, "text")
+    @auth_display = ovh.get("/domain/#{domain_name}/authInfo", nil, "text")
+    while @auth_display == "{\"message\":\"Your domain is being unlocked, please wait...\"}"
+      sleep(5)
+    end
     redirect_to 'show'
   end
 

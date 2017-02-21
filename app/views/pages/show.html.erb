@@ -20,19 +20,20 @@
             <p>Il n'y a pas d'alias</p>
           <%end%>
 
-          <%if @auth && @gandi_operation_running == []%>
-
-            <p id="auth">Voici le code Auth:<%=@auth%></p>
-              <%=form_tag(controller: "gandi_api", action: "update") do %>
-                <%= hidden_field_tag :ndd, @resultat["domain"]%>
-                <%= hidden_field_tag :auth, @auth%>
-                <%= submit_tag "Transférer sur Gandi", class: "btn btn-danger" %>
-              <%end%>
-            <%else%>
-            <p>Une action est déjà en cours sur ce nom de domaine</p>
-              <%=form_tag("/gandi_api/index", :method => :get, :id => "msform" ) do %>
-                <%= hidden_field_tag :ndd_in_process, @resultat["domain"]%>
-                <%= submit_tag "Voir l'étape sur gandi", class: "next action-button-lg" %>
+          <%if @auth %>
+              <%if @gandi_operation_running == [] %>
+                <p id="auth">Voici le code Auth:<%=@auth%></p>
+                  <%=form_tag(controller: "gandi_api", action: "update") do %>
+                    <%= hidden_field_tag :ndd, @resultat["domain"]%>
+                    <%= hidden_field_tag :auth, @auth%>
+                    <%= submit_tag "Transférer sur Gandi", class: "action-button-red" %>
+                  <%end%>
+              <%else%>
+                <p>Une action est déjà en cours sur ce nom de domaine</p>
+                  <%=form_tag("/gandi_api/index", :method => :get, :id => "msform" ) do %>
+                    <%= hidden_field_tag :ndd_in_process, @resultat["domain"]%>
+                    <%= submit_tag "Voir l'étape sur gandi", class: "next action-button-lg" %>
+                  <%end%>
               <%end%>
           <%end%>
 

@@ -21,7 +21,7 @@
             <div class="col-md-4 col-xs-12">
               <%=form_tag("/pages/:id", method: :get) do %>
                 <%= hidden_field_tag :ndd, info["domain"]%>
-                <%= submit_tag "Voir les infos du nom de domaine", class: "next action-button", :formtarget => "_blank" %>
+                <%= submit_tag "Voir infos", class: "next action-button", :formtarget => "_blank" %>
               <%end%>
             </div>
             </ul>
