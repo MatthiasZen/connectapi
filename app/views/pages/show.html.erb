@@ -43,15 +43,20 @@
       <%if @is_locked%>
         <%=form_tag(controller: "pages", action: "edit") do %>
           <%= hidden_field_tag :ndd, @resultat["domain"]%>
-          <%= submit_tag "Déverouiller le nom de domaine", class: "btn btn-success" %>
+          <%= submit_tag "Déverouiller le NDD", class: "action-button-lg", id: "unlock-alert" %>
           <%end%>
       <%end%>
 
       <form action="/" method="get", id="msform">
-            <input type="submit" value = "Page d'accueil", class = "next action-button">
+            <input type="submit" value = "Page d'accueil", class = "next action-button", id = "test_alert">
       </form>
     </div>
   </div>
 </div>
 
 
+<!--
+$("#unlock-alert").click(function () {
+       alert("test");
+   });
+   -->

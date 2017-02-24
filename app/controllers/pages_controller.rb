@@ -44,7 +44,6 @@ class PagesController < ApplicationController
         end
 
         #get the auth code
-
         if ovh.get("/domain/#{domain_name}")["transferLockStatus"] == "unlocked"
             @auth = ovh.get("/domain/#{domain_name}/authInfo", nil, "text")
             @gandi_operation_running = api.operation.list({'domain': domain_name, 'type': 'domain_transfer_in'})
@@ -64,8 +63,7 @@ class PagesController < ApplicationController
     domain_name = params["ndd"]
     ovh = OVH::REST.new(ENV["apiKey"], ENV["appSecret"], ENV["consumerKey"])
     ovh.put("/domain/#{domain_name}", {"transferLockStatus"=>'unlocked'})
-    @auth_display = ovh.get("/domain/#{domain_name}/authInfo", nil, "text")
-    while @auth_display == "{\"message\":\"Your domain is being unlocked, please wait...\"}"
+    while ovh.get("/domain/#{domain_name}/authInfo", nil, "text") == "{\"message\":\"Your domain is being unlocked, please wait...\"}"
       sleep(5)
     end
     redirect_to 'show'
