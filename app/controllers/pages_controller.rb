@@ -17,7 +17,6 @@ class PagesController < ApplicationController
   def show
 
     domain_name = params["ndd"]
-
     #calling the OVH REST gem
 
     ovh = OVH::REST.new(ENV["apiKey"], ENV["appSecret"], ENV["consumerKey"])
