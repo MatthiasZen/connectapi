@@ -30,7 +30,7 @@
                   <%end%>
               <%else%>
                 <p>Une action est déjà en cours sur ce nom de domaine</p>
-                  <%=form_tag("/gandi_api/index", :method => :get, :id => "msform" ) do %>
+                  <%=form_tag("/gandi_api/show", :method => :get, :id => "msform" ) do %>
                     <%= hidden_field_tag :ndd_in_process, @resultat["domain"]%>
                     <%= submit_tag "Voir l'étape sur gandi", class: "next action-button-lg" %>
                   <%end%>
@@ -44,7 +44,7 @@
         <%=form_tag(controller: "pages", action: "edit") do %>
           <%= hidden_field_tag :ndd, @resultat["domain"]%>
           <%= submit_tag "Déverouiller le NDD", class: "action-button-lg", id: "unlock-alert" %>
-          <%end%>
+        <%end%>
       <%end%>
 
       <form action="/" method="get", id="msform">

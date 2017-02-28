@@ -1,20 +1,13 @@
 class GandiApiController < ApplicationController
 
   def index
-    api = Gandi::Session.new(ENV["GandiapiKey"])
-#faire ndd.all.name
-# afficher leur étape à coté avec @status of operation
-    domain_name = params['ndd_in_process']
-    if domain_name != ""
-    @status_of_operation = api.operation.list({'domain': domain_name, 'type': 'domain_transfer_in'})
-    else
-      flash[:alert] = "Le nom de domaine est vide!"
-      redirect_to root_path
-    end
-
+    @ndd_transfered_status = Ndd.all
   end
 
   def show
+    api = Gandi::Session.new(ENV["GandiapiKey"])
+    domain_name = params['ndd_in_process']
+    @status_of_operation = api.operation.list({'domain': domain_name, 'type': 'domain_transfer_in'})
   end
 
   def update

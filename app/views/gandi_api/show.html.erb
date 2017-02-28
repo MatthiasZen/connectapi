@@ -1,2 +1,26 @@
-<h1>GandiApi#show</h1>
-<p>Find me in app/views/gandi_api/show.html.erb</p>
+<div class="container">
+  <div class="text-center">
+    <h1 class="fs-title">Tableau des activités sur les NDD</h1>
+      <div class="fs-subtitle"
+        <%if @status_of_operation != []%>
+          <%(@status_of_operation).each do |s|%>
+          <h2 class="fs-title">
+          <%= s.infos.label%>
+          </h2>
+          <p>Date de mise à jour:
+          <%=s.date_updated.day%>
+          <%=s.date_updated.month%>
+          <%=s.date_updated.year%>
+          </p>
+          <p>Etape: <%=s.step%></p>
+          <p>Id de l'opération: <%=s.id%></p>
+          <%end%>
+        <%else%>
+          <p>Il n'y a pas d'opérations en cours sur ce nom de domaine</p>
+        <%end%>
+      </div>
+      <form action="/" method="get" id="msform">
+        <input type="submit" value = "Page d'accueil", class = "next action-button">
+      </form>
+  </div>
+</div>
