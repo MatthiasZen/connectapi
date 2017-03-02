@@ -11,7 +11,7 @@
 /*form styles*/
 #msform {
   width: 400px;
-  margin: 50px auto;
+  margin: 20px auto;
   text-align: center;
   position: relative;
 }
@@ -67,6 +67,8 @@
   cursor: pointer;
   padding: 10px 5px;
   margin: 10px 5px;
+  font-size: 13px;
+  font-family: montserrat;
 }
 
 .action-button-red {
@@ -78,7 +80,9 @@
   border-radius: 1px;
   cursor: pointer;
   padding: 10px 5px;
-  margin: 10px 5px;
+  margin: 40px 5px;
+  font-size: 13px;
+  font-family: montserrat;
 }
 
 .action-button-lg {
@@ -91,6 +95,8 @@
   cursor: pointer;
   padding: 10px 5px;
   margin: 10px 5px;
+  font-size: 13px;
+  font-family: montserrat;
 }
 #msform .action-button:hover, #msform .action-button:focus {
   box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
@@ -102,6 +108,10 @@
 
 .action-button-red:hover {
   box-shadow: 0 0 0 2px white, 0 0 0 3px #D9534F;
+}
+
+.action-button:hover {
+  box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
 }
 /*headings*/
 .fs-title {
@@ -117,5 +127,7 @@
   margin-bottom: 20px;
 }
 
-
+.margin-top-20 {
+  margin-top: 20px;
+}
 

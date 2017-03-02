@@ -1,17 +1,20 @@
-<div class="container">
-  <div class="text-center">
-    <h1>Index des noms e domaiens en cours</h1>
-    <%@ndd_transfered_status.each do |ndd|%>
-    <ul>
-      <li>
-        <%=ndd.name%>
-        <form action="/gandi_api/show" method="get" id="msform">
-            <input type="hidden" value = <%=ndd.name%> name="ndd_in_process" placeholder="exemple.fr" class="form-control form-margin">
-            <input type="submit" value = "Voir", class = "next action-button">
-        </form>
-      </li>
-    </ul>
-    <%end%>
+<div class="wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="text-center">
+        <h1 class="fs-title">Statut des NDD en cours de transfert</h1>
+        <%@ndd_transfered_status.each do |ndd|%>
+          <div class="col-md-6 col-xs-12 margin-top-20">
+            <%=ndd.name%>
+          </div>
+          <div class="col-md-6 col-xs-12">
+            <form action="/gandi_api/show" method="get" >
+              <input type="hidden" value = <%=ndd.name%> name="ndd_in_process" placeholder="exemple.fr" class="form-control form-margin">
+              <input type="submit" value = "Voir", class = "action-button">
+            </form>
+          </div>
+        <%end%>
+      </div>
+    </div>
   </div>
 </div>
-
