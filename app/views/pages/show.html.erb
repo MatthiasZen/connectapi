@@ -26,13 +26,13 @@
                   <%=form_tag(controller: "gandi_api", action: "update", ) do %>
                     <%= hidden_field_tag :ndd, @resultat["domain"]%>
                     <%= hidden_field_tag :auth, @auth%>
-                    <%= submit_tag "Transférer sur Gandi", class: "action-button-red" %>
+                    <%= submit_tag "Transférer sur Gandi", class: "action-button-red", id: "unlock-alert" %>
                   <%end%>
               <%else%>
                 <p>Une action est déjà en cours sur ce nom de domaine</p>
-                  <%=form_tag("/gandi_api/show", :method => :get, :id => "msform" ) do %>
+                  <%=form_tag("/gandi_api/show", :method => :get ) do %>
                     <%= hidden_field_tag :ndd_in_process, @resultat["domain"]%>
-                    <%= submit_tag "Voir l'étape sur gandi", class: "next action-button-lg button-margin-top-40" %>
+                    <%= submit_tag "Voir l'étape sur gandi", class: "action-button-red" %>
                   <%end%>
               <%end%>
           <%end%>
@@ -43,7 +43,7 @@
       <%if @is_locked%>
         <%=form_tag(controller: "pages", action: "edit") do %>
           <%= hidden_field_tag :ndd, @resultat["domain"]%>
-          <%= submit_tag "Déverouiller le NDD", class: "action-button-lg", id: "unlock-alert" %>
+          <%= submit_tag "Déverouiller le NDD", class: "action-button-lg" %>
         <%end%>
       <%end%>
 
@@ -56,7 +56,7 @@
 
 <script>
   $("#unlock-alert").click(function () {
-       alert("Etes-vous sûr de transféré le NDD?");
+       alert("Vous allez transférer un NDD");
    });
 </script>
 
